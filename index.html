@@ -132,9 +132,15 @@ function confirmYes() {
 
 function noAfterYes() {
   const content = document.getElementById("content");
+
   content.innerHTML = `
     <h1 style="margin-top:80px; color:#d6336c;">Too late 😘</h1>
   `;
+
+  // After 1.5 seconds, continue to the final page
+  setTimeout(() => {
+    finalYes();
+  }, 1500);
 }
 
 function finalYes() {
@@ -196,4 +202,5 @@ function runAway() {
 
 </body>
 </html>
+
 
