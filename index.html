@@ -105,13 +105,44 @@
 
 <script>
 function yes() {
+  confirmYes();
+}
+
+function confirmYes() {
+  const content = document.getElementById("content");
+
+  content.innerHTML = `
+    <div style="text-align:center; margin-top:80px; color:#d6336c;">
+      <h1>Really? 😏</h1>
+
+      <div style="margin-top:40px;">
+        <button onclick="finalYes()" 
+                style="padding:15px 30px; font-size:20px; border:none; border-radius:8px; background:#ff4d6d; color:white; cursor:pointer; margin:20px;">
+          Yes
+        </button>
+
+        <button onclick="noAfterYes()" 
+                style="padding:15px 30px; font-size:20px; border:none; border-radius:8px; background:#adb5bd; color:white; cursor:pointer; margin:20px;">
+          No
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function noAfterYes() {
+  const content = document.getElementById("content");
+  content.innerHTML = `
+    <h1 style="margin-top:80px; color:#d6336c;">Too late 😘</h1>
+  `;
+}
+
+function finalYes() {
   const overlay = document.getElementById("pinkOverlay");
   const content = document.getElementById("content");
 
-  // Fade in
   overlay.style.opacity = "1";
 
-  // Replace content after fade
   setTimeout(() => {
     content.innerHTML = `
       <div style="text-align:center; margin-top:80px; color:#d6336c;">
@@ -120,13 +151,9 @@ function yes() {
              style="width:300px; max-width:90%; border-radius:12px; margin-top:20px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
       </div>
     `;
-
-    // Fade overlay OUT so content becomes visible
     overlay.style.opacity = "0";
-
   }, 1000);
 
-  // Hearts
   for (let i = 0; i < 20; i++) {
     setTimeout(() => {
       const heart = document.createElement("div");
@@ -138,7 +165,6 @@ function yes() {
     }, i * 150);
   }
 
-  // Sparkles
   for (let i = 0; i < 25; i++) {
     setTimeout(() => {
       const s = document.createElement("div");
@@ -170,3 +196,4 @@ function runAway() {
 
 </body>
 </html>
+
