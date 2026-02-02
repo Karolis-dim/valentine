@@ -35,9 +35,57 @@
     color: white;
     position: absolute;
   }
+
+  /* Full‑screen pink overlay */
+#pinkOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: pink;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease-in-out;
+  z-index: 5;
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 30px;
+  animation: floatUp 4s linear forwards;
+  z-index: 10;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-120vh) scale(1.8); opacity: 0; }
+}
+
+/* Sparkles */
+.sparkle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: sparkleAnim 1.5s ease-out forwards;
+  z-index: 12;
+}
+
+@keyframes sparkleAnim {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+  
 </style>
 </head>
 <body>
+
+  <div id="pinkOverlay"></div>
 
   <h1>Will you be my Valentine? ❤️</h1>
 
@@ -50,16 +98,48 @@
   </div>
 
   <script>
-  function yes() {
-  document.body.innerHTML = `
-    <div style="text-align:center; margin-top:80px;">
-      <h1>Yay! I knew you'd say yes ❤️🌹</h1>
-      <img src="images2.jpg" 
-           alt="Happy us"
-           style="width:300px; max-width:90%; border-radius:12px; margin-top:20px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
-    </div>
-  `;
+function yes() {
+  // Pink fade‑in
+  const overlay = document.getElementById("pinkOverlay");
+  overlay.style.opacity = "1";
+
+  // Replace content after fade
+  setTimeout(() => {
+    document.body.innerHTML = `
+      <div style="text-align:center; margin-top:80px; color:#d6336c;">
+        <h1>Yay! I knew you'd say yes ❤️🌹</h1>
+        <img src="your_second_photo.jpg"
+             style="width:300px; max-width:90%; border-radius:12px; margin-top:20px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
+      </div>
+      <div id="pinkOverlay" style="opacity:1;"></div>
+    `;
+  }, 900);
+
+  // Floating hearts generator
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.innerHTML = "💖";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }, i * 150);
+  }
+
+  // Sparkles generator
+  for (let i = 0; i < 25; i++) {
+    setTimeout(() => {
+      const s = document.createElement("div");
+      s.className = "sparkle";
+      s.style.left = Math.random() * 100 + "vw";
+      s.style.top = Math.random() * 100 + "vh";
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 1500);
+    }, i * 80);
+  }
 }
+
 
   function runAway() {
     const btn = document.getElementById("noBtn");
@@ -82,6 +162,7 @@
 
 </body>
 </html>
+
 
 
 
