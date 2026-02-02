@@ -87,15 +87,13 @@
 
 <body>
 
-<!-- Overlay stays outside content so it never gets deleted -->
 <div id="pinkOverlay"></div>
 
-<!-- Everything else goes inside this wrapper -->
 <div id="content">
 
   <h1>Will you be my Valentine? ❤️</h1>
 
-  <img src="yourphoto.jpg" alt="Cute Valentine"
+  <img src="images.jpg" alt="Cute Valentine"
        style="width:300px; max-width:90%; border-radius:12px; margin-top:20px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
 
   <div id="buttonContainer" style="margin-top:40px; position:relative; height:120px; transform: translateX(-40px);">
@@ -103,25 +101,32 @@
     <button id="noBtn" class="btn" onmouseover="runAway()">No</button>
   </div>
 
-</div> <!-- end content -->
+</div>
 
 <script>
 function yes() {
   const overlay = document.getElementById("pinkOverlay");
   const content = document.getElementById("content");
 
+  // Fade in
   overlay.style.opacity = "1";
 
+  // Replace content after fade
   setTimeout(() => {
     content.innerHTML = `
       <div style="text-align:center; margin-top:80px; color:#d6336c;">
         <h1>Yay! I knew you'd say yes ❤️🌹</h1>
-        <img src="your_second_photo.jpg"
+        <img src="images2.jpg"
              style="width:300px; max-width:90%; border-radius:12px; margin-top:20px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
       </div>
     `;
-  }, 900);
 
+    // Fade overlay OUT so content becomes visible
+    overlay.style.opacity = "0";
+
+  }, 1000);
+
+  // Hearts
   for (let i = 0; i < 20; i++) {
     setTimeout(() => {
       const heart = document.createElement("div");
@@ -133,6 +138,7 @@ function yes() {
     }, i * 150);
   }
 
+  // Sparkles
   for (let i = 0; i < 25; i++) {
     setTimeout(() => {
       const s = document.createElement("div");
